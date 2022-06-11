@@ -11,11 +11,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
+@DisplayName("When running MathUtils")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MathUtilsTest {
 	
@@ -36,18 +41,37 @@ class MathUtilsTest {
 		System.out.println("Cleaning up...");
 	}
 
-	@Test
-	void testAddPositive() {
-		//fail("Not yet implemented");
-		//System.out.println("This test ran by varun");
-		//MathUtils mathUtils = new MathUtils();
-		int expected =4;
-		int actual = mathUtils.add(1,3);
-		assertEquals(expected,actual,"The add method should add two numbers");
+	@Nested
+	@Tag("Math")
+	@DisplayName("add method")
+	class AddTest {
+		
+		@Test
+		@DisplayName("when adding 2 positive numbers")
+		void testAddPositive() {
+			//fail("Not yet implemented");
+			//System.out.println("This test ran by varun");
+			//MathUtils mathUtils = new MathUtils();
+			int expected =4;
+			int actual = mathUtils.add(1,3);
+			assertEquals(expected,actual,"should returns the right sum");
+		}
+		
+		@Test
+		@DisplayName("when adding positive/negative numbers")
+		void testAddNegative() {
+			int expected = -2;
+			int actual = mathUtils.add(-1,-1);
+			assertEquals(expected,actual, ()-> "should returns"+expected+" but got "+actual);
+		}
+		
 	}
 	
 	
+	
+	
 	@Test
+	@Tag("Math")
 	@DisplayName("multiply method")
 	void testMultiply() {
 		
@@ -63,6 +87,7 @@ class MathUtilsTest {
 	
 	@Test
 	@EnabledOnOs(OS.MAC)
+	@Tag("Math")
 	@DisplayName("Test Divide method")
 	void testDivide() {
 		
@@ -76,9 +101,11 @@ class MathUtilsTest {
 		//assertThrows(NullPointerException.class, () -> {mathUtils.divide(2, 0);},"Method to test divide by zero to throw");
 	}
 	
-	@Test
-	void testComputeCircleRadius() {
+	@RepeatedTest(3)
+	@Tag("CircleTag")
+	void testComputeCircleRadius(RepetitionInfo repetitionInfo) {
 		//MathUtils mathUtils = new MathUtils();
+		System.out.println(repetitionInfo.getCurrentRepetition());
 		assertEquals(314,mathUtils.computeCircleArea(10),"This should find circle area");
 	}
 	
