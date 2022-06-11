@@ -6,8 +6,8 @@
   <name>junit-5-basics</name>
   
   <properties>
-  		<maven.compiler.target>8</maven.compiler.target>
-  		<maven.compiler.source>8</maven.compiler.source>
+  		<maven.compiler.target>17</maven.compiler.target>
+  		<maven.compiler.source>17</maven.compiler.source>
   		<junit.jupiter.version>5.4.0</junit.jupiter.version>
   </properties>
   
@@ -27,5 +27,14 @@
   	 </dependency>
   	 
   </dependencies>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-surefire-plugin</artifactId>
+  			<version>2.22.1</version>
+  		</plugin>
+  	</plugins>
+  </build>
   
 </project>
